@@ -25,6 +25,9 @@ y = np.array([[0],
 # 设置随机种子以获得可重复的结果
 np.random.seed(1)
 
+# 学习率
+learning_rate = 0.9
+
 # 初始化权重
 hidden_size = 4
 Wxh = 2 * np.random.random((3, hidden_size)) - 1  # 输入到隐藏层的权重
@@ -71,9 +74,9 @@ for j in range(60000):
         h_prev = h  # 更新 h_prev 为当前的 h
 
     # 更新权重
-    Wxh += dWxh
-    Whh += dWhh
-    Why += dWhy
+    Wxh += learning_rate * dWxh
+    Whh += learning_rate * dWhh
+    Why += learning_rate * dWhy
 
 print("训练后的输出:")
 h = np.zeros((1, hidden_size))

@@ -25,6 +25,9 @@ y = np.array([[0],
 # 设置随机种子以获得可重复的结果
 np.random.seed(1)
 
+# 学习率
+learning_rate = 0.9
+
 # 初始化权重
 synapse_0 = 2 * np.random.random((3, 4)) - 1
 synapse_1 = 2 * np.random.random((4, 1)) - 1
@@ -49,8 +52,8 @@ for j in range(60000):
     layer_1_delta = layer_1_error * sigmoid_derivative(layer_1)
 
     # 更新权重
-    synapse_1 += layer_1.T.dot(layer_2_delta)
-    synapse_0 += layer_0.T.dot(layer_1_delta)
+    synapse_0 += learning_rate * layer_0.T.dot(layer_1_delta)
+    synapse_1 += learning_rate * layer_1.T.dot(layer_2_delta)
 
 print("Output After Training:")
 print(layer_2)
